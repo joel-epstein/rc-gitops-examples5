@@ -20,9 +20,9 @@ spec:
       imagePullSecrets:
       - name: gm-docker-secret
       volumes:
-      - name: greymatter-secret-admin
+      - name: greymatter-admin-sync
         secret:
-          secretName: greymatter-secret-admin
+          secretName: greymatter-admin-sync
       containers:
       - name: greymatter-sync
         image: greymatter.jfrog.io/oci/greymatter-proxy:1.9.1-beta1
@@ -50,7 +50,7 @@ spec:
             cpu: "100m"
             memory: "256Mi"
         volumeMounts:
-        - name: greymatter-secret-admin
+        - name: greymatter-admin-sync
           readOnly: true
           mountPath: "/var/lib/greymatter/.ssh"
         env:
@@ -70,4 +70,4 @@ metadata:
   namespace: examples
 data:
   # property-like keys; each key maps to a simple value
-  GREYMATTER_GIT_REMOTE: ""
+  GREYMATTER_GIT_REMOTE: "github.com:joel-epstein/rc-gitops-examples5.git"
