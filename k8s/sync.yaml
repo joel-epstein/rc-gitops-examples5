@@ -20,12 +20,12 @@ spec:
       imagePullSecrets:
       - name: gm-docker-secret
       volumes:
-      - name: greymatter-sync-secret
+      - name: greymatter-secret-admin
         secret:
-          secretName: greymatter-sync-secret
+          secretName: greymatter-secret-admin
       containers:
       - name: greymatter-sync
-        image: greymatter.jfrog.io/oci/greymatter-cli:4.8.0
+        image: greymatter.jfrog.io/oci/greymatter-proxy:1.9.1-beta1
         imagePullPolicy: Always
         command: ["/usr/local/bin/greymatter"]
         args: [
@@ -50,7 +50,7 @@ spec:
             cpu: "100m"
             memory: "256Mi"
         volumeMounts:
-        - name: greymatter-sync-secret
+        - name: greymatter-secret-admin
           readOnly: true
           mountPath: "/var/lib/greymatter/.ssh"
         env:

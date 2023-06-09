@@ -15,18 +15,20 @@ spec:
     spec:
       containers:
         - name: sidecar
-          image: greymatter.jfrog.io/oci/greymatter-proxy:1.9.0
+          image: greymatter.jfrog.io/oci/greymatter-proxy:1.9.1-alpha
           imagePullPolicy: Always
           ports:
           - containerPort: 10809
-            name: proxy
-          - containerPort: 8081
-            name: metrics
+            name: ingress
+          - containerPort: 8082
+            name: stats
           env:
             - name: XDS_CLUSTER
               value: examples-edge
             - name: ENVOY_ADMIN_LOG_PATH
               value: /dev/stdout
+            - name: ENVOY_ADMIN_PORT
+              value: "8002"
             - name: PROXY_DYNAMIC
               value: "true"
             - name: XDS_ZONE
@@ -49,9 +51,9 @@ spec:
         - name: tls-certs
           secret:
             defaultMode: 420
-            secretName: greymatter-examples-edge-certs
+            secretName: greymatter-edge-ingress
       imagePullSecrets:
-      - name: gm-docker-secret
+      - name: greymatter-image-pull
 ---
 apiVersion: v1
 kind: Service

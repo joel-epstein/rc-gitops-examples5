@@ -81,7 +81,7 @@ to do before we launch that sync StatefulSet:
 # GitOps SSH key
 # EDIT THIS to reflect your own, or some other SSH private key with access,
 # to the repository you would like the operator to use for GitOps.
-kubectl create secret generic greymatter-sync-secret \
+kubectl create secret generic greymatter-admin-sync \
     --from-file=ssh-private-key=$HOME/.ssh/id_ed25519 \
     --from-literal=password="REDACTED" \
     -n $MY_NAMESPACE
@@ -154,7 +154,7 @@ We recommend using Kubernetes secrets and volume mounts to independently manage 
 #### Securing Your Gateway
 A hook is provided for setting up TLS on the given edge gateway for your project. Please create a secret at the following location:
 ```bash
-kubectl create secret generic greymatter-examples-edge-certs \
+kubectl create secret generic greymatter-edge-ingress \
 	--from-file=ca.crt=./ca.crt \
 	--from-file=server.crt=./server.crt \
 	--from-file=server.key=./server.key \
