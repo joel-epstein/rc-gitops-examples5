@@ -18,7 +18,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:
-      - name: gm-docker-secret
+      - name: greymatter-image-pull
       volumes:
       - name: greymatter-admin-sync
         secret:
@@ -70,4 +70,4 @@ metadata:
   namespace: examples
 data:
   # property-like keys; each key maps to a simple value
-  GREYMATTER_GIT_REMOTE: "github.com:joel-epstein/rc-gitops-examples5.git"
+  GREYMATTER_GIT_REMOTE: "git@github.com:joel-epstein/rc-gitops-examples5.git"
